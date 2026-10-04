@@ -17,9 +17,8 @@ public class Main {
             System.out.println("1 change strategy");
             System.out.println("2 move");
             System.out.println("0 exit");
-            System.out.print("choice: ");
 
-            int choice = scanner.nextInt();
+            int choice = readInt(scanner, "choice: ");
             if (choice == 0) {
                 break;
             }
@@ -29,8 +28,7 @@ public class Main {
                     System.out.println("1 walk");
                     System.out.println("2 horse ride");
                     System.out.println("3 fly");
-                    System.out.print("choice: ");
-                    int strat = scanner.nextInt();
+                    int strat = readInt(scanner, "choice: ");
                     switch (strat) {
                         case 1 -> hero.setStrategy(new Walk());
                         case 2 -> hero.setStrategy(new HorseRide());
@@ -38,14 +36,30 @@ public class Main {
                     }
                 }
                 case 2 -> {
-                    System.out.print("x: ");
-                    double x = scanner.nextDouble();
-                    System.out.print("y: ");
-                    double y = scanner.nextDouble();
+                    double x = readDouble(scanner, "x: ");
+                    double y = readDouble(scanner, "y: ");
                     hero.move(new Point(x, y));
                 }
             }
             System.out.println();
         }
+    }
+
+    private static int readInt(Scanner scanner, String prompt) {
+        System.out.print(prompt);
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+            System.out.print(prompt);
+        }
+        return scanner.nextInt();
+    }
+
+    private static double readDouble(Scanner scanner, String prompt) {
+        System.out.print(prompt);
+        while (!scanner.hasNextDouble()) {
+            scanner.next();
+            System.out.print(prompt);
+        }
+        return scanner.nextDouble();
     }
 }
